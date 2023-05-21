@@ -1,0 +1,23 @@
+.pokemonList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pokemonCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 352.25px;
+    height: 136.86px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.pokemonCard h4 {
+    margin: 0 0 16px;
+    text-align: center;
+}
+
+.pokemonCard p {
+    margin: 8px 0;
+    text-align: center;
+}
