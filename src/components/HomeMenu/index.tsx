@@ -5,11 +5,12 @@ import { PokemonCard } from "../PokemonCard";
 import { SearchBar } from "../SearchBar";
 import PokemonContext from "../../context/PokemonContext";
 import { DropDownContext } from "../../context/DropDownContext";
+import { SearchBarContext } from "../../context/SearchBarContext";
 export const HomeMenu = () => {
+  const { searchBar } = useContext(SearchBarContext);
   const { pokemonCards } = useContext(PokemonContext);
   const { selectedTypes, selectedAttacks, selectedExperience } =
     useContext(DropDownContext);
-
   const getAttackCategory = (attack: number): string => {
     if (attack < 50) return "Low Attack";
     if (attack < 100) return "Medium Attack";
@@ -22,23 +23,21 @@ export const HomeMenu = () => {
     return "High Experience";
   };
 
-  console.log("Selected types: ", selectedTypes);
-  console.log("Selected attacks: ", selectedAttacks);
-  console.log("Selected experience: ", selectedExperience);
-  
+ 
   const filteredPokemonCards = pokemonCards.filter((pokemon) => {
+    const meetsNameCriteria = pokemon.name.toLowerCase().includes(searchBar.toLowerCase())
     const meetsTypeCriteria = selectedTypes.length === 0 || pokemon.types.some((type) => selectedTypes.includes(type));
     const meetsAttackCriteria = selectedAttacks.length === 0 || selectedAttacks.includes(getAttackCategory(pokemon.attack));
     const meetsExperienceCriteria = selectedExperience.length === 0 || selectedExperience.includes(getExperienceCategory(pokemon.experience));
     
-    console.log(`Pokemon ${pokemon.name} meets type criteria: ${meetsTypeCriteria}`);
-    console.log(`Pokemon ${pokemon.name} meets attack criteria: ${meetsAttackCriteria}`);
-    console.log(`Pokemon ${pokemon.name} meets experience criteria: ${meetsExperienceCriteria}`);
+
+    console.log(meetsNameCriteria)
+    console.log(meetsNameCriteria)
+
     
-    return meetsTypeCriteria && meetsAttackCriteria && meetsExperienceCriteria;
+    return meetsTypeCriteria && meetsAttackCriteria && meetsExperienceCriteria && meetsNameCriteria;
   });
   
-  console.log("Filtered Pokemon: ", filteredPokemonCards);
 
   return (
     <section className={styles.sectionContainer}>

@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./index.module.css";
-
+import { SearchBarContext } from "../../context/SearchBarContext";
 
 export const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState<any>("");
+  const { searchBar, setSearchBar } = useContext(SearchBarContext);
+
   const handleSearchChange = (event: any) => {
-    setSearchTerm(event.target.value);
+    setSearchBar(event.target.value);
+    // console.log("SearchBar current " + event.target.value)
   };
 
   return (
-    
-    <form className={styles.form}>
+    <div className={styles.form}>
       <input
         type="text"
         placeholder="encuentra tu pokémon..."
-        // value={searchTerm}
-        // onChange={handleSearchChange}
+        value={searchBar}
+        onChange={handleSearchChange}
       />
-    </form>
+    </div>
   );
 };
