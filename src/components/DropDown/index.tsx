@@ -1,42 +1,44 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./index.module.css";
+import { DropDownContext } from "../../context/DropDownContext";
 
-export const DropDown = () => {
-  const [isOpen, setIsOpen] = useState<any>(false);
+type DropDownProps = {
+  type: string;
+};
+
+export const DropDown = ({ type }: DropDownProps) => {
+  const { dropDownItems, setDropDownItems } = useContext(DropDownContext);
+  const selectedItems = dropDownItems[type] || {};
+  const [isOpen, setIsOpen] = useState(false);
+
   const toggleDropdown = () => setIsOpen(!isOpen);
-  const [selected, setSelected] = useState<any>({
-    Fire: false,
-    Normal: false,
-    Electric: false,
-    Water: false,
-  });
 
-  const toggleSelection = (type: any) =>
-    setSelected({ ...selected, [type]: !selected[type] });
+  const toggleSelection = (item: string) =>
+    setDropDownItems({
+      ...dropDownItems,
+      [type]: { ...selectedItems, [item]: !selectedItems[item] },
+    });
 
   return (
     <div className={styles.formRadius}>
-      <div className={styles.formRadius}>
-        <div className={styles.dropdown}>
-          <button onClick={toggleDropdown} className={styles.dropdownButton}>
-            {" "}
-            <span>Tipo</span>{" "}
-          </button>
-          {isOpen && (
-            <div className={styles.dropdownContent}>
-              {Object.keys(selected).map((type) => (
-                <label key={type}>
-                  <input
-                    type="checkbox"
-                    // checked={selected[type]}
-                    // onChange={() => toggleSelection(type)}
-                  />
-                  {type}
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className={styles.dropdown}>
+        <button onClick={toggleDropdown} className={styles.dropdownButton}>
+          <span>{type}</span>
+        </button>
+        {isOpen && (
+          <div className={styles.dropdownContent}>
+            {Object.keys(selectedItems).map((item) => (
+              <label key={item}>
+                <input
+                  type="checkbox"
+                  checked={selectedItems[item]}
+                  onChange={() => toggleSelection(item)}
+                />
+                {item}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

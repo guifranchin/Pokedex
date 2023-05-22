@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-type PokemonCard = {
+export type PokemonCardProps = {
   name: string;
   attack: number;
   defense: number;
@@ -8,8 +8,8 @@ type PokemonCard = {
 };
 
 export type PokemonContextProps = {
-  pokemonCards: PokemonCard[];
-  setPokemonCards: React.Dispatch<React.SetStateAction<PokemonCard[]>>;
+  pokemonCards: PokemonCardProps[];
+  setPokemonCards: React.Dispatch<React.SetStateAction<PokemonCardProps[]>>;
 };
 
 type PokemonContextProviderProps = {
@@ -17,7 +17,16 @@ type PokemonContextProviderProps = {
 };
 
 const DEFAULT_VALUES = {
-  pokemonCards: [],
+  pokemonCards: [
+    {
+      name: "Quilava",
+      attack: 419,
+      defense: 419,
+      types: ["Grass", "Poison"],
+      image: "Pokemon",
+    },
+  
+  ],
   setPokemonCards: () => [{}],
 } as PokemonContextProps;
 
@@ -27,7 +36,7 @@ export const PokemonContext =
 export const PokemonContextProvider = ({
   children,
 }: PokemonContextProviderProps) => {
-  const [pokemonCards, setPokemonCards] = useState<PokemonCard[]>([]);
+  const [pokemonCards, setPokemonCards] = useState<PokemonCardProps[]>([]);
 
   return (
     <PokemonContext.Provider value={{ pokemonCards, setPokemonCards }}>
