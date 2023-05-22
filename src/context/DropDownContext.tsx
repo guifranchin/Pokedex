@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 type DropDownItem = string;
 
-type DropDownContextProps = {
+export type DropDownContextProps = {
   dropDownItems: DropDownItem[];
   setDropDownItems: React.Dispatch<React.SetStateAction<DropDownItem[]>>;
 };
