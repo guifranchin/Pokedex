@@ -2,61 +2,24 @@ import React, { useState } from "react";
 import styles from "./index.module.css";
 import { DropDown } from "../DropDown";
 import { PokemonCard } from "../PokemonCard";
-
-
+import { SearchBar } from "../SearchBar";
 
 export const HomeMenu = () => {
-  const [searchTerm, setSearchTerm] = useState<any>("");
-  const [selectedTypes, setSelectedTypes] = useState<any>({});
-
-  const handleSearchChange = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleTypeChange = (e: any) => {
-    const { name, checked } = e.target;
-    setSelectedTypes((prev: any) => ({ ...prev, [name]: checked }));
-  };
-
-  const [isOpen, setIsOpen] = useState<any>(false);
-  const [selected, setSelected] = useState<any>({
-    Fire: false,
-    Normal: false,
-    Electric: false,
-    Water: false,
-  });
-
-
-  const toggleSelection = (type: any) =>
-    setSelected({ ...selected, [type]: !selected[type] });
-
   return (
     <section className={styles.sectionContainer}>
       <div>
-        <h3>
-          800 <strong>Pokemons</strong> for you to choose your favorite
-        </h3>
+        <p>
+          {800} <strong>Pokemons</strong> for you to choose your favorite
+        </p>
       </div>
       <main className={styles.main}>
-        <form className={styles.form}>
-          <input
-            type="text"
-            placeholder="encuentra tu pokémon..."
-            // value={searchTerm}
-            // onChange={handleSearchChange}
-          />
-        </form>
+        <SearchBar />
         <div className={styles.formRadius}>
-        <DropDown/>
-        <DropDown/>
-        <DropDown/>
+          <DropDown />
+          <DropDown />
+          <DropDown />
         </div>
         <div className={styles.pokemonList}>
-          <PokemonCard />
-          <PokemonCard />
-          <PokemonCard />
-          <PokemonCard />
-          <PokemonCard />
           <PokemonCard />
           <PokemonCard />
           <PokemonCard />
@@ -67,15 +30,57 @@ export const HomeMenu = () => {
   );
 };
 
-const Home = () => {
-  return (
-    <div>
-      <h1>Welcome to Pokedex</h1>
-      <HomeMenu />
-      <footer>
-        <p>Make with ♥ for the PokéSpartans team Platzi Master</p>
-        <p>Our Team</p>
-      </footer>
-    </div>
-  );
-};
+
+
+
+const dropDownData = [
+  {
+    Fire: false,
+    Normal: false,
+    Electric: false,
+    Water: false,
+  },
+  {
+    Grass: false,
+    Ice: false,
+    Fighting: false,
+    Psychic: false,
+  },
+  {
+    Bug: false,
+    Ghost: false,
+    Dark: false,
+    Dragon: false,
+  },
+];
+
+const pokemonCardData = [
+  {
+    name: "Quilava",
+    attack: 419,
+    defense: 419,
+    types: ["Grass", "Poison"],
+    image: "Pokemon",
+  },
+  {
+    name: "Pikachu",
+    attack: 500,
+    defense: 500,
+    types: ["Electric"],
+    image: "Pokemon",
+  },
+  {
+    name: "Bulbasaur",
+    attack: 300,
+    defense: 350,
+    types: ["Grass", "Poison"],
+    image: "Pokemon",
+  },
+  {
+    name: "Charmander",
+    attack: 400,
+    defense: 350,
+    types: ["Fire"],
+    image: "Pokemon",
+  },
+];

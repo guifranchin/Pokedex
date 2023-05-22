@@ -11,25 +11,33 @@ export const DropDown = () => {
     Water: false,
   });
 
-    return (
+  const toggleSelection = (type: any) =>
+    setSelected({ ...selected, [type]: !selected[type] });
+
+  return (
+    <div className={styles.formRadius}>
       <div className={styles.formRadius}>
-          <div className={styles.dropdown}>
-            <button onClick={toggleDropdown} className={styles.dropdownButton }> <span>Tipo</span> </button>
-            {isOpen && (
-              <div className={styles.dropdownContent}>
-                {Object.keys(selected).map((type) => (
-                  <label key={type}>
-                    <input
-                      type="checkbox"
-                      // checked={selected[type]}
-                      // onChange={() => toggleSelection(type)}
-                    />
-                    {type}
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
+        <div className={styles.dropdown}>
+          <button onClick={toggleDropdown} className={styles.dropdownButton}>
+            {" "}
+            <span>Tipo</span>{" "}
+          </button>
+          {isOpen && (
+            <div className={styles.dropdownContent}>
+              {Object.keys(selected).map((type) => (
+                <label key={type}>
+                  <input
+                    type="checkbox"
+                    // checked={selected[type]}
+                    // onChange={() => toggleSelection(type)}
+                  />
+                  {type}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
-      );
-    };
+      </div>
+    </div>
+  );
+};
