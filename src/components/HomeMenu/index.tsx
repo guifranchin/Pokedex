@@ -53,8 +53,14 @@ export const HomeMenu = () => {
         </div>
         <div className={styles.pokemonList}>
           <PokemonCard />
-     
-        
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
+          <PokemonCard />
         </div>
       </main>
     </section>
