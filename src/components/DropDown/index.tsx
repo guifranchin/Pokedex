@@ -7,17 +7,46 @@ type DropDownProps = {
 };
 
 export const DropDown = ({ type }: DropDownProps) => {
-  const { dropDownItems, setDropDownItems } = useContext(DropDownContext);
+  const {
+    dropDownItems,
+    setDropDownItems,
+    setSelectedTypes,
+    setSelectedAttacks,
+    setSelectedExperience,
+  } = useContext(DropDownContext);
   const selectedItems = dropDownItems[type] || {};
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const toggleSelection = (item: string) =>
+  const toggleSelection = (item: string) => {
+    const newSelectedItems = { ...selectedItems, [item]: !selectedItems[item] };
+
     setDropDownItems({
       ...dropDownItems,
-      [type]: { ...selectedItems, [item]: !selectedItems[item] },
+      [type]: newSelectedItems,
     });
+
+    switch (type) {
+      case "Tipo":
+        setSelectedTypes(
+          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
+        );
+        break;
+      case "Ataque":
+        setSelectedAttacks(
+          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
+        );
+        break;
+      case "Experiencia":
+        setSelectedExperience(
+          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
+        );
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className={styles.formRadius}>

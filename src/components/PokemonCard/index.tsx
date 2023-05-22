@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
 import Pokemon from "../../assets/pokemon1.svg";
-import { PokemonCardProps } from "../../context/PokemonContext";
 
-export const PokemonCard = ({pokemon}: any) => {
+type PokemonDataType = {
+  name: string;
+  attack: number;
+  defense: number;
+  types: string[];
+  image: string;
+};
+type PokemonCardProps = {
+  pokemon: PokemonDataType;
+};
+export const PokemonCard = ({pokemon}: PokemonCardProps) => {
   return (
     <div key={pokemon.name} className={styles.pokemonCard}>
       <article>
