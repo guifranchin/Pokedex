@@ -42,30 +42,37 @@ export const PokemonContextProvider = ({
   );
   const [offset, setOffset] = useState(0);
   const [count, setCount] = useState(0);
-  
+
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const fetchPokemonData = async (offset: number) => {
     const pokemonList = await listPokemon(offset);
-    
-    setCount(pokemonList.count)
 
-    const pokemonDataPromises = pokemonList.results.map(async (pokemon: any) => {
-      const pokemonData = await get(pokemon.url);
+    setCount(pokemonList.count);
 
-      const name = pokemonData.name;
-      const attack = pokemonData.stats.find((stat: any) => stat.stat.name === 'attack')?.base_stat;
-      const defense = pokemonData.stats.find((stat: any) => stat.stat.name === 'defense')?.base_stat;
-      const experience = pokemonData.base_experience;
-      const types = pokemonData.types.map((type: any) => type.type.name);
-      const imagem = pokemonData.sprites.other["official-artwork"].front_default;
+    const pokemonDataPromises = pokemonList.results.map(
+      async (pokemon: any) => {
+        const pokemonData = await get(pokemon.url);
 
-      return { name, attack, defense, experience, types, imagem };
-    });
+        const name = pokemonData.name;
+        const attack = pokemonData.stats.find(
+          (stat: any) => stat.stat.name === "attack"
+        )?.base_stat;
+        const defense = pokemonData.stats.find(
+          (stat: any) => stat.stat.name === "defense"
+        )?.base_stat;
+        const experience = pokemonData.base_experience;
+        const types = pokemonData.types.map((type: any) => type.type.name);
+        const imagem =
+          pokemonData.sprites.other["official-artwork"].front_default;
+
+        return { name, attack, defense, experience, types, imagem };
+      }
+    );
 
     const newPokemonData = await Promise.all(pokemonDataPromises);
 
-    setPokemonCards(prevPokemons => [...prevPokemons, ...newPokemonData]);
+    setPokemonCards((prevPokemons) => [...prevPokemons, ...newPokemonData]);
   };
 
   useEffect(() => {
@@ -74,7 +81,7 @@ export const PokemonContextProvider = ({
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) { 
+      if (entries[0].isIntersecting) {
         setOffset((prevOffset) => prevOffset + 9);
       }
     });
@@ -92,13 +99,19 @@ export const PokemonContextProvider = ({
 
   return (
     <PokemonContext.Provider
-      value={{ pokemonCards, setPokemonCards, offset, setOffset, count , setCount}}
+      value={{
+        pokemonCards,
+        setPokemonCards,
+        offset,
+        setOffset,
+        count,
+        setCount
+      }}
     >
       {children}
-      <div
-        ref={loadMoreRef}
-        style={{ height: '1px', backgroundColor: "blue"}}
-      >TESTEEEEEEEEEEEEEEEEEE </div>
+      <div ref={loadMoreRef} style={{ height: "1px", backgroundColor: "blue" }}>
+        TESTEEEEEEEEEEEEEEEEEE{" "}
+      </div>
     </PokemonContext.Provider>
   );
 };
