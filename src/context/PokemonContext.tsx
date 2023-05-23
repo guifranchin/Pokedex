@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { get, listPokemon } from "../api/pokeApi";
 export type PokemonCardProps = {
   name: string;
@@ -12,6 +12,8 @@ export type PokemonCardProps = {
 export type PokemonContextProps = {
   pokemonCards: PokemonCardProps[];
   setPokemonCards: React.Dispatch<React.SetStateAction<PokemonCardProps[]>>;
+  offset: number;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type PokemonContextProviderProps = {
@@ -19,89 +21,10 @@ type PokemonContextProviderProps = {
 };
 
 const DEFAULT_VALUES = {
-  pokemonCards: [
-    // {
-    //   name: "Charmander",
-    //   attack: 52,
-    //   defense: 43,
-    //   experience: 62,
-    //   types: ["Fire"],
-    //   image: "CharmanderImage",
-    // },
-    // {
-    //   name: "Ivysaur",
-    //   attack: 62,
-    //   defense: 63,
-    //   experience: 142,
-    //   types: ["Grass", "Poison"],
-    //   image: "IvysaurImage",
-    // },
-    // {
-    //   name: "Blastoise",
-    //   attack: 83,
-    //   defense: 100,
-    //   experience: 239,
-    //   types: ["Water"],
-    //   image: "BlastoiseImage",
-    // },
-    // {
-    //   name: "Pikachu",
-    //   attack: 55,
-    //   defense: 40,
-    //   experience: 112,
-    //   types: ["Electric"],
-    //   image: "PikachuImage",
-    // },
-    // {
-    //   name: "Jigglypuff",
-    //   attack: 45,
-    //   defense: 20,
-    //   experience: 95,
-    //   types: ["Normal", "Fairy"],
-    //   image: "JigglypuffImage",
-    // },
-    // {
-    //   name: "Gengar",
-    //   attack: 65,
-    //   defense: 60,
-    //   experience: 225,
-    //   types: ["Ghost", "Poison"],
-    //   image: "GengarImage",
-    // },
-    // {
-    //   name: "Arcanine",
-    //   attack: 110,
-    //   defense: 80,
-    //   experience: 180,
-    //   types: ["Fire"],
-    //   image: "ArcanineImage",
-    // },
-    // {
-    //   name: "Scyther",
-    //   attack: 110,
-    //   defense: 80,
-    //   experience: 100,
-    //   types: ["Bug", "Flying"],
-    //   image: "ScytherImage",
-    // },
-    // {
-    //   name: "Gyarados",
-    //   attack: 125,
-    //   defense: 79,
-    //   experience: 218,
-    //   types: ["Water", "Flying"],
-    //   image: "GyaradosImage",
-    // },
-    // {
-    //   name: "Eevee",
-    //   attack: 55,
-    //   defense: 50,
-    //   experience: 65,
-    //   types: ["Normal"],
-    //   image: "EeveeImage",
-    // },
-  ],
+  pokemonCards: [],
   setPokemonCards: () => [{}],
+  offset: 0,
+  setOffset: () => [0],
 } as PokemonContextProps;
 
 export const PokemonContext =
@@ -113,40 +36,62 @@ export const PokemonContextProvider = ({
   const [pokemonCards, setPokemonCards] = useState<PokemonCardProps[]>(
     DEFAULT_VALUES.pokemonCards
   );
+  const [offset, setOffset] = useState(0);
+  
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
+  const fetchPokemonData = async (offset: number) => {
+    const pokemonList = await listPokemon(offset);
 
-  console.log(pokemonCards)
+    const pokemonDataPromises = pokemonList.results.map(async (pokemon: any) => {
+      const pokemonData = await get(pokemon.url);
+
+      const name = pokemonData.name;
+      const attack = pokemonData.stats.find((stat: any) => stat.stat.name === 'attack')?.base_stat;
+      const defense = pokemonData.stats.find((stat: any) => stat.stat.name === 'defense')?.base_stat;
+      const experience = pokemonData.base_experience;
+      const types = pokemonData.types.map((type: any) => type.type.name);
+      const imagem = pokemonData.sprites.other["official-artwork"].front_default;
+
+      return { name, attack, defense, experience, types, imagem };
+    });
+
+    const newPokemonData = await Promise.all(pokemonDataPromises);
+
+    setPokemonCards((oldPokemonData) => [...oldPokemonData, ...newPokemonData]);
+  };
 
   useEffect(() => {
-    const fetchPokemonData = async () => {
-      const pokemonList = await listPokemon();
+    fetchPokemonData(offset);
+  }, [offset]);
 
-      const pokemonDataPromises = pokemonList.results.map(async (pokemon: any) => {
-        const pokemonData = await get(pokemon.url);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { 
+        setOffset((prevOffset) => prevOffset + 20);
+      }
+    });
 
-        const name = pokemonData.name;
-        const attack = pokemonData.stats.find((stat: any) => stat.stat.name === 'attack')?.base_stat;
-        const defense = pokemonData.stats.find((stat: any) => stat.stat.name === 'defense')?.base_stat;
-        const experience = pokemonData.base_experience;
-        const types = pokemonData.types.map((type: any) => type.type.name);
-        const imagem = pokemonData.sprites.other["official-artwork"].front_default;
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
 
-        console.log(imagem)
-
-        return { name, attack, defense, experience, types, imagem };
-      });
-
-      const pokemonData = await Promise.all(pokemonDataPromises);
-
-      setPokemonCards(pokemonData);
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
     };
-
-    fetchPokemonData();
   }, []);
 
   return (
-    <PokemonContext.Provider value={{ pokemonCards, setPokemonCards }}>
+    <PokemonContext.Provider
+      value={{ pokemonCards, setPokemonCards, offset, setOffset }}
+    >
       {children}
+      <div
+        // ref={loadMoreRef}
+        // style={{ height: '1px', backgroundColor: "blue"}}
+      >TESTEEEEEEEEEEEEEEEEEE </div>
     </PokemonContext.Provider>
   );
 };

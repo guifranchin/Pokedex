@@ -8,9 +8,10 @@ import { DropDownContext } from "../../context/DropDownContext";
 import { SearchBarContext } from "../../context/SearchBarContext";
 export const HomeMenu = () => {
   const { searchBar } = useContext(SearchBarContext);
-  const { pokemonCards } = useContext(PokemonContext);
+  const { pokemonCards, setOffset } = useContext(PokemonContext);
   const { selectedTypes, selectedAttacks, selectedExperience } =
     useContext(DropDownContext);
+
   const getAttackCategory = (attack: number): string => {
     if (attack < 50) return "Low Attack";
     if (attack < 100) return "Medium Attack";
@@ -23,16 +24,27 @@ export const HomeMenu = () => {
     return "High Experience";
   };
 
- 
   const filteredPokemonCards = pokemonCards.filter((pokemon) => {
-    const meetsNameCriteria = pokemon.name.toLowerCase().includes(searchBar.toLowerCase())
-    const meetsTypeCriteria = selectedTypes.length === 0 || pokemon.types.some((type) => selectedTypes.includes(type));
-    const meetsAttackCriteria = selectedAttacks.length === 0 || selectedAttacks.includes(getAttackCategory(pokemon.attack));
-    const meetsExperienceCriteria = selectedExperience.length === 0 || selectedExperience.includes(getExperienceCategory(pokemon.experience));
-  
-    return meetsTypeCriteria && meetsAttackCriteria && meetsExperienceCriteria && meetsNameCriteria;
+    const meetsNameCriteria = pokemon.name
+      .toLowerCase()
+      .includes(searchBar.toLowerCase());
+    const meetsTypeCriteria =
+      selectedTypes.length === 0 ||
+      pokemon.types.some((type) => selectedTypes.includes(type));
+    const meetsAttackCriteria =
+      selectedAttacks.length === 0 ||
+      selectedAttacks.includes(getAttackCategory(pokemon.attack));
+    const meetsExperienceCriteria =
+      selectedExperience.length === 0 ||
+      selectedExperience.includes(getExperienceCategory(pokemon.experience));
+
+    return (
+      meetsTypeCriteria &&
+      meetsAttackCriteria &&
+      meetsExperienceCriteria &&
+      meetsNameCriteria
+    );
   });
-  
 
   return (
     <section className={styles.sectionContainer}>
