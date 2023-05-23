@@ -7,12 +7,13 @@ type PokemonDataType = {
   attack: number;
   defense: number;
   types: string[];
-  image: string;
+  imagem: string;
 };
 type PokemonCardProps = {
   pokemon: PokemonDataType;
 };
 export const PokemonCard = ({pokemon}: PokemonCardProps) => {
+
   return (
     <div key={pokemon.name} className={styles.pokemonCard}>
       <article>
@@ -33,7 +34,9 @@ export const PokemonCard = ({pokemon}: PokemonCardProps) => {
           ))}
         </div>
       </article>
-      <img src={Pokemon} />
+ 
+        <img src={pokemon.imagem} />
+   
     </div>
   );
 };

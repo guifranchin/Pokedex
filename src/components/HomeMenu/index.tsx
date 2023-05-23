@@ -29,12 +29,7 @@ export const HomeMenu = () => {
     const meetsTypeCriteria = selectedTypes.length === 0 || pokemon.types.some((type) => selectedTypes.includes(type));
     const meetsAttackCriteria = selectedAttacks.length === 0 || selectedAttacks.includes(getAttackCategory(pokemon.attack));
     const meetsExperienceCriteria = selectedExperience.length === 0 || selectedExperience.includes(getExperienceCategory(pokemon.experience));
-    
-
-    console.log(meetsNameCriteria)
-    console.log(meetsNameCriteria)
-
-    
+  
     return meetsTypeCriteria && meetsAttackCriteria && meetsExperienceCriteria && meetsNameCriteria;
   });
   
