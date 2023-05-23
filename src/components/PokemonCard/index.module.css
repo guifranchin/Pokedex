@@ -6,6 +6,7 @@
     height: 137px;
     width: 352px;
     margin: 10px;
+    overflow: hidden
 }
 
 .pokemonCard article {
@@ -76,12 +77,22 @@
 }
 
 .statsInfo div:nth-child(2) {
-    background-color: #07D6F2;;
+    background-color: #07D6F2;
+    ;
 }
 
-.statusBig{
+.statusBig {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
 }
+
+.pokemonCard img {
+
+    height: 156px; 
+  width: 167px;
+
+}
+
+
