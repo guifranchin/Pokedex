@@ -1,5 +1,5 @@
 .sectionContainer {
-    height: calc(100vh - 113px);
+    height: 100%;
     /* box-shadow: inset 0px -4px 16px rgba(1, 28, 64, 0.2); */
     background: linear-gradient(180deg, #FFFFFF 30.32%, #F5F5F5 100%);
     display: flex;
@@ -23,8 +23,8 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    width: 1125px;
-    height: 739px;
+    width: 100%; 
+    max-width: 1125px; 
     gap: 25px;
 }
 
@@ -66,7 +66,8 @@
 .pokemonList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 100%; 
 }
 
 .pokemonCard {
