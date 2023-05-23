@@ -8,7 +8,7 @@ import { DropDownContext } from "../../context/DropDownContext";
 import { SearchBarContext } from "../../context/SearchBarContext";
 export const HomeMenu = () => {
   const { searchBar } = useContext(SearchBarContext);
-  const { pokemonCards, setOffset } = useContext(PokemonContext);
+  const { pokemonCards, count } = useContext(PokemonContext);
   const { selectedTypes, selectedAttacks, selectedExperience } =
     useContext(DropDownContext);
 
@@ -50,7 +50,7 @@ export const HomeMenu = () => {
     <section className={styles.sectionContainer}>
       <div>
         <p>
-          {pokemonCards.length} <strong>Pokemons</strong> for you to choose your
+          {count} <strong>Pokemons</strong> for you to choose your
           favorite
         </p>
       </div>
@@ -63,7 +63,7 @@ export const HomeMenu = () => {
         </div>
         <div className={styles.pokemonList}>
           {filteredPokemonCards.map((pokemon) => (
-            <PokemonCard pokemon={pokemon} />
+            <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))}
         </div>
       </main>

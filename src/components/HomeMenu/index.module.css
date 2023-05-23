@@ -1,6 +1,6 @@
 .sectionContainer {
     height: 100%;
-    /* box-shadow: inset 0px -4px 16px rgba(1, 28, 64, 0.2); */
+    box-shadow: inset 0px -4px 16px rgba(1, 28, 64, 0.2);
     background: linear-gradient(180deg, #FFFFFF 30.32%, #F5F5F5 100%);
     display: flex;
     align-items: center;
