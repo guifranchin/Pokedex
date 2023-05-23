@@ -14,6 +14,8 @@ export type PokemonContextProps = {
   setPokemonCards: React.Dispatch<React.SetStateAction<PokemonCardProps[]>>;
   offset: number;
   setOffset: React.Dispatch<React.SetStateAction<number>>;
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type PokemonContextProviderProps = {
@@ -25,6 +27,8 @@ const DEFAULT_VALUES = {
   setPokemonCards: () => [{}],
   offset: 0,
   setOffset: () => [0],
+  count: 0,
+  setCount: () => [0],
 } as PokemonContextProps;
 
 export const PokemonContext =
@@ -37,11 +41,14 @@ export const PokemonContextProvider = ({
     DEFAULT_VALUES.pokemonCards
   );
   const [offset, setOffset] = useState(0);
+  const [count, setCount] = useState(0);
   
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const fetchPokemonData = async (offset: number) => {
     const pokemonList = await listPokemon(offset);
+    
+    setCount(pokemonList.count)
 
     const pokemonDataPromises = pokemonList.results.map(async (pokemon: any) => {
       const pokemonData = await get(pokemon.url);
@@ -58,7 +65,7 @@ export const PokemonContextProvider = ({
 
     const newPokemonData = await Promise.all(pokemonDataPromises);
 
-    setPokemonCards((oldPokemonData) => [...oldPokemonData, ...newPokemonData]);
+    setPokemonCards(prevPokemons => [...prevPokemons, ...newPokemonData]);
   };
 
   useEffect(() => {
@@ -68,7 +75,7 @@ export const PokemonContextProvider = ({
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) { 
-        setOffset((prevOffset) => prevOffset + 20);
+        setOffset((prevOffset) => prevOffset + 9);
       }
     });
 
@@ -85,12 +92,12 @@ export const PokemonContextProvider = ({
 
   return (
     <PokemonContext.Provider
-      value={{ pokemonCards, setPokemonCards, offset, setOffset }}
+      value={{ pokemonCards, setPokemonCards, offset, setOffset, count , setCount}}
     >
       {children}
       <div
-        // ref={loadMoreRef}
-        // style={{ height: '1px', backgroundColor: "blue"}}
+        ref={loadMoreRef}
+        style={{ height: '1px', backgroundColor: "blue"}}
       >TESTEEEEEEEEEEEEEEEEEE </div>
     </PokemonContext.Provider>
   );
