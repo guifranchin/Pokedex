@@ -8,11 +8,39 @@ type ModalProps = {
   onClose: () => void;
 };
 export const Modal = ({ pokemon, onClose }: ModalProps) => {
-
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <div className={styles.imageContent}>
+      <div className={styles.modalContent} style={{
+            background: `linear-gradient(to bottom, ${tinycolor(
+              pokemon.color
+            )
+              .desaturate(5)
+              .darken(35)
+              .lighten(10)
+              .toString()} 8%, 
+                    ${tinycolor(pokemon.color)
+                      .darken(15)
+                      .desaturate(40)
+                      .lighten(20)
+                      .toString()} 100%)`,
+          }}>
+        <div
+          className={styles.imageContent}
+          style={{
+            background: `linear-gradient(to bottom, ${tinycolor(
+              pokemon.color
+            )
+              .desaturate(10)
+              .darken(30)
+              .lighten(15)
+              .toString()} 8%, 
+                    ${tinycolor(pokemon.color)
+                      .darken(15)
+                      .desaturate(40)
+                      .lighten(20)
+                      .toString()} 100%)`,
+          }}
+        >
           <img src={pokemon.imagem} />
           {pokemon.types.map((type: string) => (
             <div
@@ -27,8 +55,12 @@ export const Modal = ({ pokemon, onClose }: ModalProps) => {
         <article>
           <div className={styles.top}>
             <div className={styles.name}>{pokemon.name}</div>
-            <div className={styles.geration}>Generation 1</div>
-            <div className={styles.experience}>{pokemon.experience}</div>
+            <div className={styles.stylesRight}>
+              <div className={styles.geration}>Generation 1</div>
+              <div className={styles.experienceGeneration}>
+                {pokemon.experience}
+              </div>
+            </div>
           </div>
           <div className={styles.abilities}>
             <div>Abilities</div>
@@ -71,7 +103,7 @@ export const Modal = ({ pokemon, onClose }: ModalProps) => {
             <div className={styles.statusBig}>
               <div className={styles.statsValue}>{pokemon.specialDefense}</div>
               <span>Sp Defense</span>
-            </div> 
+            </div>
           </div>
         </article>
         <button className={styles.closeButton} onClick={onClose}>
