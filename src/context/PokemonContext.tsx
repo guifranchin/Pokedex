@@ -3,6 +3,7 @@ import { get, listPokemon } from "../api/pokeApi";
 export type PokemonCardProps = {
   name: string;
   attack: number;
+  hp: number;
   specialAttack: number;
   defense: number;
   specialDefense: number;
@@ -76,6 +77,11 @@ export const PokemonContextProvider = ({
           (stat: any) => stat.stat.name === "special-defense"
         )?.base_stat;
 
+        const hp = pokemonData.stats.find(
+          (stat: any) => stat.stat.name === "hp"
+        )?.base_stat;
+
+
         const experience = pokemonData.base_experience;
 
         const abilities = pokemonData.abilities.map((ability: any) => ability.ability.name);
@@ -89,7 +95,7 @@ export const PokemonContextProvider = ({
         const imagem =
           pokemonData.sprites.other["official-artwork"].front_default;
 
-        return { name, attack, specialAttack, defense, specialDefense, experience, types, abilities,  imagem, ["color"]: specieColor.name };
+        return { name, attack, hp, specialAttack, defense, specialDefense, experience, types, abilities,  imagem, ["color"]: specieColor.name };
       }
     );
 

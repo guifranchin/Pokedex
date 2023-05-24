@@ -26,6 +26,7 @@ export const typeColors: { [key: string]: string } = {
 export type PokemonDataType = {
   name: string;
   attack: number;
+  hp: number;
   specialAttack: number;
   defense: number;
   specialDefense: number;
@@ -42,8 +43,13 @@ type PokemonCardProps = {
 export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
+
   const openModal = (pokemon: any) => {
     setSelectedPokemon(pokemon);
+  };
+
+  const onClose = () => {
+    setSelectedPokemon(null);
   };
 
   return (
@@ -62,8 +68,10 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
       onClick={() => openModal(pokemon)}
     >
       {selectedPokemon && (
-        <Modal onClose={() => {
-          setSelectedPokemon(null)}} pokemon={pokemon} />
+        <>
+          <Modal onClose={onClose} pokemon={selectedPokemon} />
+          {console.log('Modal component rendered')}
+        </>
       )}
       <article>
         <h4>{pokemon.name}</h4>
