@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
-import Pokemon from "../../assets/pokemon1.svg";
+import tinycolor from "tinycolor2";
 
 type PokemonDataType = {
   name: string;
   attack: number;
+  specialAttack: number;
   defense: number;
+  specialDefense: number;
+  experience: number;
   types: string[];
+  color: string;
   imagem: string;
+  abilities: string[]
 };
+
 type PokemonCardProps = {
   pokemon: PokemonDataType;
 };
 export const PokemonCard = ({pokemon}: PokemonCardProps) => {
 
   return (
-    <div key={pokemon.name} className={styles.pokemonCard}>
+    <div key={pokemon.name} className={styles.pokemonCard} style={{
+      background: `linear-gradient(to right, white 33.5%, ${tinycolor(pokemon.color)
+        .darken(10)
+        .desaturate(30)
+        .lighten(20)
+        .toString()} 33.5%)`,
+    }}>
       <article>
         <h4>{pokemon.name}</h4>
         <div className={styles.stats}>

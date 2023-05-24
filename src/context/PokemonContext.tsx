@@ -3,10 +3,14 @@ import { get, listPokemon } from "../api/pokeApi";
 export type PokemonCardProps = {
   name: string;
   attack: number;
+  specialAttack: number;
   defense: number;
+  specialDefense: number;
   experience: number;
   types: string[];
+  color: string;
   imagem: string;
+  abilities: string[]
 };
 
 export type PokemonContextProps = {
@@ -55,18 +59,37 @@ export const PokemonContextProvider = ({
         const pokemonData = await get(pokemon.url);
 
         const name = pokemonData.name;
+
+        const specialAttack = pokemonData.stats.find(
+          (stat: any) => stat.stat.name === "special-attack"
+        )?.base_stat;
+
         const attack = pokemonData.stats.find(
           (stat: any) => stat.stat.name === "attack"
         )?.base_stat;
+
         const defense = pokemonData.stats.find(
           (stat: any) => stat.stat.name === "defense"
         )?.base_stat;
+
+        const specialDefense = pokemonData.stats.find(
+          (stat: any) => stat.stat.name === "special-defense"
+        )?.base_stat;
+
         const experience = pokemonData.base_experience;
+
+        const abilities = pokemonData.abilities.map((ability: any) => ability.ability.name);
+
         const types = pokemonData.types.map((type: any) => type.type.name);
+
+        const specieUrl = pokemonData.species.url;
+
+        const {color: specieColor} = await get(specieUrl)
+
         const imagem =
           pokemonData.sprites.other["official-artwork"].front_default;
 
-        return { name, attack, defense, experience, types, imagem };
+        return { name, attack, specialAttack, defense, specialDefense, experience, types, abilities,  imagem, ["color"]: specieColor.name };
       }
     );
 
@@ -109,9 +132,8 @@ export const PokemonContextProvider = ({
       }}
     >
       {children}
-      <div ref={loadMoreRef} style={{ height: "1px", backgroundColor: "blue" }}>
-        TESTEEEEEEEEEEEEEEEEEE{" "}
-      </div>
+      <div ref={loadMoreRef} style={{ height: "1px" }}/>
+    
     </PokemonContext.Provider>
   );
 };

@@ -28,9 +28,9 @@ export const HomeMenu = () => {
     const meetsNameCriteria = pokemon.name
       .toLowerCase()
       .includes(searchBar.toLowerCase());
-    const meetsTypeCriteria =
-      selectedTypes.length === 0 ||
-      pokemon.types.some((type) => selectedTypes.includes(type));
+    // const meetsTypeCriteria =
+    //   selectedTypes.length === 0 ||
+    //   pokemon.types.some((type) => selectedTypes.includes(type));
     const meetsAttackCriteria =
       selectedAttacks.length === 0 ||
       selectedAttacks.includes(getAttackCategory(pokemon.attack));
@@ -39,12 +39,13 @@ export const HomeMenu = () => {
       selectedExperience.includes(getExperienceCategory(pokemon.experience));
 
     return (
-      meetsTypeCriteria &&
+      // meetsTypeCriteria &&
       meetsAttackCriteria &&
       meetsExperienceCriteria &&
       meetsNameCriteria
     );
   });
+
 
   return (
     <section className={styles.sectionContainer}>
