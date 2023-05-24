@@ -1,5 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { get } from "../api/pokeApi";
+import PokemonContext from "./PokemonContext";
+import { PokemonCard } from "../components/PokemonCard";
 export type DropDownItems = {
   [type: string]: { [item: string]: boolean };
 };
@@ -57,11 +59,13 @@ export const DropDownContextProvider = ({
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedAttacks, setSelectedAttacks] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
+  
+  const { setPokemonCards, pokemonCards } = useContext(PokemonContext);
 
   const fetchTypePokemon = async () => {
     const { results } = await get("type");
 
-    let dropDownItems = results.reduce((acc: any, type: any) => {
+    const dropDownItems = results.reduce((acc: any, type: any) => {
       acc[type.name] = false;
       return acc;
     }, {});
@@ -75,7 +79,34 @@ export const DropDownContextProvider = ({
 
   useEffect(() => {
     fetchTypePokemon();
-  });
+  }, []);
+
+  const fetchPokemonByType = async (type: any) => {
+    console.log(type, "debugging")
+    const { pokemon } = await get(`/type/${type}`);
+    const pokemonPromises = pokemon.map(async ({ pokemon }: any) => {
+      const pokemonDetails = await get(pokemon.url);
+
+      return {
+        name: pokemonDetails.name,
+        attack: pokemonDetails.stats.find((stat: any) => stat.stat.name === 'attack')?.base_stat,
+        defense: pokemonDetails.stats.find((stat: any) => stat.stat.name === 'defense')?.base_stat,
+        types: pokemonDetails.types.map((type: any) => type.type.name),
+        imagem: pokemonDetails.sprites.other["official-artwork"].front_default,
+      };
+    });
+
+    const pokemonData = await Promise.all(pokemonPromises);
+    setPokemonCards((prevPokemons) => [...prevPokemons, ...pokemonData]);
+  };
+
+  useEffect(() => {
+    const currentSelectedTypes = selectedTypes;
+    
+      setPokemonCards([]);
+      currentSelectedTypes.forEach(fetchPokemonByType);
+  
+  }, [selectedTypes]);
 
   return (
     <DropDownContext.Provider

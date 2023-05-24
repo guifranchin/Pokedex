@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import styles from "./index.module.css";
 import { DropDownContext } from "../../context/DropDownContext";
 
@@ -19,34 +19,52 @@ export const DropDown = ({ type }: DropDownProps) => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const toggleSelection = (item: string) => {
-    const newSelectedItems = { ...selectedItems, [item]: !selectedItems[item] };
-
-    setDropDownItems({
-      ...dropDownItems,
-      [type]: newSelectedItems,
+  const toggleSelection = useCallback((item: string) => {
+    setDropDownItems((prevItems) => {
+      const newSelectedItems = {
+        ...prevItems[type],
+        [item]: !prevItems[type][item],
+      };
+  
+      const newDropDownItems = {
+        ...prevItems,
+        [type]: newSelectedItems,
+      };
+  
+      const selectedKeys = Object.keys(newSelectedItems).filter(
+        (key) => newSelectedItems[key]
+      );
+  
+      switch (type) {
+        case "Tipo":
+          setSelectedTypes(selectedKeys);
+          break;
+        case "Ataque":
+          setSelectedAttacks(selectedKeys);
+          break;
+        case "Experiencia":
+          setSelectedExperience(selectedKeys);
+          break;
+        default:
+          break;
+      }
+  
+      return newDropDownItems;
     });
+  }, [setDropDownItems, setSelectedTypes, setSelectedAttacks, setSelectedExperience, type]);
 
-    switch (type) {
-      case "Tipo":
-        setSelectedTypes(
-          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
-        );
-        break;
-      case "Ataque":
-        setSelectedAttacks(
-          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
-        );
-        break;
-      case "Experiencia":
-        setSelectedExperience(
-          Object.keys(newSelectedItems).filter((key) => newSelectedItems[key])
-        );
-        break;
-      default:
-        break;
-    }
-  };
+  const content = useMemo(() => {
+    return Object.keys(selectedItems).map((item) => (
+      <label key={item}>
+        <input
+          type="checkbox"
+          checked={selectedItems[item]}
+          onChange={() => toggleSelection(item)}
+        />
+        {item}
+      </label>
+    ));
+  }, [selectedItems, toggleSelection]);
 
   return (
     <div className={styles.formRadius}>
@@ -54,20 +72,7 @@ export const DropDown = ({ type }: DropDownProps) => {
         <button onClick={toggleDropdown} className={styles.dropdownButton}>
           <span>{type}</span>
         </button>
-        {isOpen && (
-          <div className={styles.dropdownContent}>
-            {Object.keys(selectedItems).map((item) => (
-              <label key={item}>
-                <input
-                  type="checkbox"
-                  checked={selectedItems[item]}
-                  onChange={() => toggleSelection(item)}
-                />
-                {item}
-              </label>
-            ))}
-          </div>
-        )}
+        {isOpen && <div className={styles.dropdownContent}>{content}</div>}
       </div>
     </div>
   );
