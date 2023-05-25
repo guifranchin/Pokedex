@@ -9,7 +9,7 @@ import { SearchBarContext } from "../../context/SearchBarContext";
 export const HomeMenu = () => {
   const { searchBar } = useContext(SearchBarContext);
   const { pokemonCards, count } = useContext(PokemonContext);
-  const { selectedAttacks, selectedExperience } =
+  const { selectedAttacks, selectedExperience, selectedTypes } =
     useContext(DropDownContext);
 
   const getAttackCategory = (attack: number): string => {
@@ -28,9 +28,9 @@ export const HomeMenu = () => {
     const meetsNameCriteria = pokemon.name
       .toLowerCase()
       .includes(searchBar.toLowerCase());
-    // const meetsTypeCriteria =
-    //   selectedTypes.length === 0 ||
-    //   pokemon.types.some((type) => selectedTypes.includes(type));
+    const meetsTypeCriteria =
+      selectedTypes.length === 0 ||
+      pokemon.types.some((type) => selectedTypes.includes(type));
     const meetsAttackCriteria =
       selectedAttacks.length === 0 ||
       selectedAttacks.includes(getAttackCategory(pokemon.attack));
@@ -39,7 +39,7 @@ export const HomeMenu = () => {
       selectedExperience.includes(getExperienceCategory(pokemon.experience));
 
     return (
-      // meetsTypeCriteria &&
+      meetsTypeCriteria &&
       meetsAttackCriteria &&
       meetsExperienceCriteria &&
       meetsNameCriteria
