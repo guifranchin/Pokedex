@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import styles from "./index.module.css";
 import { DropDownContext } from "../../context/DropDownContext";
 

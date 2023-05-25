@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import  { useContext,  } from "react";
 import styles from "./index.module.css";
 import { SearchBarContext } from "../../context/SearchBarContext";
 
