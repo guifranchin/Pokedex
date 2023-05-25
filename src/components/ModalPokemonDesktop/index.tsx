@@ -1,12 +1,12 @@
-import React, { useState, useContext} from "react";
+import { useContext} from "react";
 import styles from "./index.module.css";
 import tinycolor from "tinycolor2";
 import { typeColors } from "../PokemonCard";
 import { ModalContext } from "../../context/Modal";
-import { useMediaQuery } from "react-responsive";
 
-export const ModalPokemonDesktop = ({ onClose, pokemon }: any) => {
-  const { selectedPokemon, setSelectedPokemon } = useContext(ModalContext);
+
+export const ModalPokemonDesktop = ({ onClose }: any) => {
+  const { selectedPokemon } = useContext(ModalContext);
 
   return (
     <div className={styles.modalOverlay}>

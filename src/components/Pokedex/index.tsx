@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import styles from "./index.module.css";
 import { DropDown } from "../DropDown";
 import { PokemonCard } from "../PokemonCard";
@@ -9,7 +9,7 @@ import { SearchBarContext } from "../../context/SearchBarContext";
 export const HomeMenu = () => {
   const { searchBar } = useContext(SearchBarContext);
   const { pokemonCards, count } = useContext(PokemonContext);
-  const { selectedTypes, selectedAttacks, selectedExperience } =
+  const { selectedAttacks, selectedExperience } =
     useContext(DropDownContext);
 
   const getAttackCategory = (attack: number): string => {

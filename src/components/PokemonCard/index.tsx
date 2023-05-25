@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import  { useContext } from "react";
 import styles from "./index.module.css";
 import tinycolor from "tinycolor2";
-import { Modal } from "../Modal";
+
 import { ModalContext } from "../../context/Modal";
 
 export const typeColors: { [key: string]: string } = {

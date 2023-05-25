@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState, useContext } from "react";
-import { get } from "../api/pokeApi";
-import PokemonContext from "./PokemonContext";
+import { createContext, useState } from "react";
+
 
 
 export type ModalContextProps = {
