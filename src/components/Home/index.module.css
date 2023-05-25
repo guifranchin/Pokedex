@@ -7,7 +7,7 @@
 .section {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .section img {
@@ -126,17 +126,18 @@
     }
 
     .section img {
-        height: 539px;
-        width: 706px;
+        height: 375px;
+        width: 375px;
     }
 
     .articleParagraph {
-        width: 730px;
+        width: 100%; 
+        box-sizing: border-box; 
         text-align: center;
     }
 
     .articleSection h2 {
-        width: 639px;
+        width: 368px;
         text-align: center;
     }
 

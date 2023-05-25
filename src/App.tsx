@@ -7,6 +7,8 @@ import { SearchBarContextProvider } from "./context/SearchBarContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
 import { NotFound } from "./components/NotFound";
+import { ModalContextProvider } from "./context/Modal";
+import { Modal } from "./components/Modal";
 
 function App() {
   return (
@@ -29,7 +31,10 @@ function App() {
               <PokemonContextProvider>
                 <DropDownContextProvider>
                   <SearchBarContextProvider>
-                    <HomeMenu />
+                    <ModalContextProvider>
+                      <HomeMenu />
+                      <Modal/>
+                    </ModalContextProvider>
                   </SearchBarContextProvider>
                 </DropDownContextProvider>
               </PokemonContextProvider>
