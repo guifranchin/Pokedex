@@ -61,7 +61,7 @@ export const Header = () => {
               <Link to="/pokedex">Pokédex</Link>
             </a>
             <a className={styles.button}>Legendaries</a>
-            <a className={styles.button}>Documentation</a>
+            <a className={styles.button}><Link to="https://pokeapi.co/">Documentation</Link></a>
           </div>
         </nav>
       </section>

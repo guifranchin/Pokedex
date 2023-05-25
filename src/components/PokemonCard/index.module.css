@@ -6,7 +6,8 @@
     width: 100%;
     max-width: 352.25px;
     margin: 10px;
-    overflow: hidden
+    overflow: hidden;
+    gap: 17px;
 }
 
 .pokemonCard article {
