@@ -18,13 +18,13 @@ export const NotFound = () => {
       <p>
         <i>{error.statusText || error.message}</i>
       </p>
-      <Link to={'/'}>
-      <button
-        className={Style.button}
-        //   onClick={() => addTaskOnList()}
-      >
-        Voltar
-      </button>
+      <Link to={"/"}>
+        <button
+          className={Style.button}
+          //   onClick={() => addTaskOnList()}
+        >
+          Voltar
+        </button>
       </Link>
     </div>
   );

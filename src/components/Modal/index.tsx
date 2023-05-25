@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from "react";
-import tinycolor from "tinycolor2";
-import { typeColors } from "../PokemonCard";
+import { useEffect, useContext } from "react";
 import { ModalContext } from "../../context/Modal";
 import { useMediaQuery } from "react-responsive";
 import { ModalPokemonDesktop } from "../ModalPokemonDesktop";

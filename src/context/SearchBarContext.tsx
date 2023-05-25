@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { DropDownItems } from "./DropDownContext";
 
 export type SearchBarContextProps = {
   searchBar: string;

@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { get } from "../api/pokeApi";
 import PokemonContext from "./PokemonContext";
-import { PokemonCard } from "../components/PokemonCard";
 export type DropDownItems = {
   [type: string]: { [item: string]: boolean };
 };
@@ -60,7 +59,7 @@ export const DropDownContextProvider = ({
   const [selectedAttacks, setSelectedAttacks] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
   
-  const { setPokemonCards, pokemonCards } = useContext(PokemonContext);
+  const { setPokemonCards } = useContext(PokemonContext);
 
   const fetchTypePokemon = async () => {
     const { results } = await get("type");

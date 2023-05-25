@@ -1,13 +1,12 @@
-import React, { useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import styles from "./index.module.css";
 import { ModalContext } from "../../context/Modal";
-import { useMediaQuery } from "react-responsive";
 import { typeColors } from "../PokemonCard";
 import tinycolor from "tinycolor2";
 import { styled } from "styled-components";
 
-export const ModalPokemonMobile = ({ onClose, pokemon }: any) => {
-  const { selectedPokemon, setSelectedPokemon } = useContext(ModalContext);
+export const ModalPokemonMobile = ({ onClose }: any) => {
+  const { selectedPokemon } = useContext(ModalContext);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
