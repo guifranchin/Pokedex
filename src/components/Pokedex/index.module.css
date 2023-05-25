@@ -44,6 +44,7 @@
 
 .formRadius {
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     margin-left: 50px;
 }
@@ -107,4 +108,15 @@
 .dropdown-content label {
     display: block;
     margin-bottom: 10px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .formRadius{
+        /* flex-direction: column; */
+    }
+}
+
+@media (max-width: 768px) {
+ 
 }

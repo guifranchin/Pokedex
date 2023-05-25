@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./index.module.css";
 import tinycolor from "tinycolor2";
 import { Modal } from "../Modal";
+import { ModalContext } from "../../context/Modal";
 
 export const typeColors: { [key: string]: string } = {
-  steel: "#AIAIAI",
+  stile: "#AIAIAI",
   dark: "#AIAIAI",
   rock: "#AIAIAI",
   poison: "#A974BC",
@@ -16,11 +17,12 @@ export const typeColors: { [key: string]: string } = {
   ground: "#9B897B",
   ice: "#A2CFF0",
   water: "#A2CFF0",
-  electric: "#C54545",
+  electric: "#F76545",
   fire: "#F76545",
   fighting: "#F76545",
   dragon: "#F76545",
   normal: "#76AADB",
+  gosth: "#76AADB",
 };
 
 export type PokemonDataType = {
@@ -41,15 +43,10 @@ type PokemonCardProps = {
   pokemon: PokemonDataType;
 };
 export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const { setSelectedPokemon, selectedPokemon } = useContext(ModalContext);
 
-
-  const openModal = (pokemon: any) => {
+  const openModal = () => {
     setSelectedPokemon(pokemon);
-  };
-
-  const onClose = () => {
-    setSelectedPokemon(null);
   };
 
   return (
@@ -61,18 +58,12 @@ export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
           pokemon.color
         )
           .darken(10)
-          .desaturate(30)
+          .desaturate(20)
           .lighten(20)
           .toString()} 33.5%)`,
       }}
-      onClick={() => openModal(pokemon)}
+      onClick={() => openModal()}
     >
-      {selectedPokemon && (
-        <>
-          <Modal onClose={onClose} pokemon={selectedPokemon} />
-          {console.log('Modal component rendered')}
-        </>
-      )}
       <article>
         <h4>{pokemon.name}</h4>
         <div className={styles.stats}>
