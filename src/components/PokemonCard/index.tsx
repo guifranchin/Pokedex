@@ -43,7 +43,7 @@ type PokemonCardProps = {
   pokemon: PokemonDataType;
 };
 export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
-  const { setSelectedPokemon, selectedPokemon } = useContext(ModalContext);
+  const { setSelectedPokemon } = useContext(ModalContext);
 
   const openModal = () => {
     setSelectedPokemon(pokemon);
