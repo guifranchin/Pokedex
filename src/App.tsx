@@ -45,20 +45,6 @@ function App() {
       </Routes>
     </Router>
   );
-  // return (
-  //   <>
-  //     {/* <Header/>
-  //   <Home /> */}
-  //     <Header />
-  //     <PokemonContextProvider>
-  //       <DropDownContextProvider>
-  //         <SearchBarContextProvider>
-  //           <HomeMenu />
-  //         </SearchBarContextProvider>
-  //       </DropDownContextProvider>
-  //     </PokemonContextProvider>
-  //   </>
-  // );
 }
 
 export default App;

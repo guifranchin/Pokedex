@@ -67,7 +67,7 @@ export const ModalPokemonDesktop = ({ onClose }: any) => {
             <div className={styles.abilityRow}>
               {" "}
               {selectedPokemon.abilities.map((ability: string, index: any) => {
-                return <div key={index}>{ability} </div>;
+                return <div key={index}>{ability}</div>;
               })}
             </div>
           </div>

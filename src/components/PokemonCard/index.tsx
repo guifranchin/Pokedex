@@ -5,7 +5,7 @@ import tinycolor from "tinycolor2";
 import { ModalContext } from "../../context/Modal";
 
 export const typeColors: { [key: string]: string } = {
-  stile: "#AIAIAI",
+  stile: "#A1A1A1",
   dark: "#AIAIAI",
   rock: "#AIAIAI",
   poison: "#A974BC",
@@ -17,14 +17,27 @@ export const typeColors: { [key: string]: string } = {
   ground: "#9B897B",
   ice: "#A2CFF0",
   water: "#A2CFF0",
-  electric: "#F76545",
+  electric: "#9B897B",
   fire: "#F76545",
   fighting: "#F76545",
-  dragon: "#F76545",
+  dragon: "#A1A1A1",
   normal: "#76AADB",
-  gosth: "#76AADB",
+  gosth: "#A1A1A1",
 };
 
+
+const typePokemonColor: { [key: string]: string } ={
+  black: typeColors["black"],
+  blue: typeColors["normal"],
+  brown: typeColors["ground"],
+  gray: typeColors["rock"],
+  green: typeColors["grass"],
+  pink: typeColors["fire"],
+  purple: typeColors["poison"],
+  white: typeColors["water"],
+  yellow: typeColors["eletric"],
+
+}
 export type PokemonDataType = {
   name: string;
   attack: number;

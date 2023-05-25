@@ -19,39 +19,48 @@ export const DropDown = ({ type }: DropDownProps) => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const toggleSelection = useCallback((item: string) => {
-    setDropDownItems((prevItems) => {
-      const newSelectedItems = {
-        ...prevItems[type],
-        [item]: !prevItems[type][item],
-      };
-  
-      const newDropDownItems = {
-        ...prevItems,
-        [type]: newSelectedItems,
-      };
-  
-      const selectedKeys = Object.keys(newSelectedItems).filter(
-        (key) => newSelectedItems[key]
-      );
-  
-      switch (type) {
-        case "Tipo":
-          setSelectedTypes(selectedKeys);
-          break;
-        case "Ataque":
-          setSelectedAttacks(selectedKeys);
-          break;
-        case "Experiencia":
-          setSelectedExperience(selectedKeys);
-          break;
-        default:
-          break;
-      }
-  
-      return newDropDownItems;
-    });
-  }, [setDropDownItems, setSelectedTypes, setSelectedAttacks, setSelectedExperience, type]);
+  const toggleSelection = useCallback(
+    (item: string) => {
+      setDropDownItems((prevItems) => {
+        const newSelectedItems = {
+          ...prevItems[type],
+          [item]: !prevItems[type][item],
+        };
+
+        const newDropDownItems = {
+          ...prevItems,
+          [type]: newSelectedItems,
+        };
+
+        const selectedKeys = Object.keys(newSelectedItems).filter(
+          (key) => newSelectedItems[key]
+        );
+
+        switch (type) {
+          case "Tipo":
+            setSelectedTypes(selectedKeys);
+            break;
+          case "Ataque":
+            setSelectedAttacks(selectedKeys);
+            break;
+          case "Experiencia":
+            setSelectedExperience(selectedKeys);
+            break;
+          default:
+            break;
+        }
+
+        return newDropDownItems;
+      });
+    },
+    [
+      setDropDownItems,
+      setSelectedTypes,
+      setSelectedAttacks,
+      setSelectedExperience,
+      type,
+    ]
+  );
 
   const content = useMemo(() => {
     return Object.keys(selectedItems).map((item) => (
@@ -70,7 +79,9 @@ export const DropDown = ({ type }: DropDownProps) => {
     <div className={styles.formRadius}>
       <div className={styles.dropdown}>
         <button onClick={toggleDropdown} className={styles.dropdownButton}>
-          <span>{type}</span>
+          <span>
+            <strong>{type}</strong>
+          </span>
         </button>
         {isOpen && <div className={styles.dropdownContent}>{content}</div>}
       </div>
