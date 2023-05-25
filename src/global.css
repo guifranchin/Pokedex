@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
 :root {
+  text-transform: capitalize;
   font-family: 'Karla', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --third-color: #F5DB13;
   --primary-color: #4F2B80;

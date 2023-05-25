@@ -1,31 +1,26 @@
-import { useRouteError, Link } from "react-router-dom";
-import Style from "./index.module.css";
-type ErrorResponse = {
-  data: any;
-  status: number;
-  statusText: string;
-  message?: string;
-};
-
+import style from "./index.module.css";
+import team from "../../assets/team.png"
+import { Link } from "react-router-dom";
 export const NotFound = () => {
-  const error = useRouteError() as ErrorResponse;
-  console.error(error);
 
   return (
-    <div className={Style.errorPage}>
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-      <Link to={"/"}>
-        <button
-          className={Style.button}
-          //   onClick={() => addTaskOnList()}
-        >
-          Voltar
-        </button>
-      </Link>
-    </div>
+    <section className={style.section_container}>
+      <p className={style.error}>404</p>
+      <div className={style.team}>
+        <img src={team}></img>
+        <div className={style.alig_container}>
+          <div>
+            <p className={style.paragrafo}>
+              <span>The rocket team </span>has won this time.
+            </p>
+          </div>
+          <div>
+            <button className={style.button}>
+              <span><Link to="/">Return</Link></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   );
-};
+}
