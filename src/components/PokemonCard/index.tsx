@@ -25,19 +25,6 @@ export const typeColors: { [key: string]: string } = {
   gosth: "#A1A1A1",
 };
 
-
-const typePokemonColor: { [key: string]: string } ={
-  black: typeColors["black"],
-  blue: typeColors["normal"],
-  brown: typeColors["ground"],
-  gray: typeColors["rock"],
-  green: typeColors["grass"],
-  pink: typeColors["fire"],
-  purple: typeColors["poison"],
-  white: typeColors["water"],
-  yellow: typeColors["eletric"],
-
-}
 export type PokemonDataType = {
   name: string;
   attack: number;
