@@ -1,11 +1,17 @@
 import { useEffect, useContext } from "react";
 import styles from "./index.module.css";
 import { ModalContext } from "../../context/Modal";
-import { typeColors } from "../PokemonCard";
+
 import tinycolor from "tinycolor2";
 import { styled } from "styled-components";
+import { typeColors } from "../../models/models";
 
-export const ModalPokemonMobile = ({ onClose }: any) => {
+interface Props {
+  pokemon: any;
+  onClose: () => void;
+}
+
+export const ModalPokemonMobile = ({ onClose }: Props) => {
   const { selectedPokemon } = useContext(ModalContext);
 
   useEffect(() => {
@@ -95,7 +101,7 @@ export const ModalPokemonMobile = ({ onClose }: any) => {
                 <div className={styles.abilityRow}>
                   {" "}
                   {selectedPokemon.abilities.map(
-                    (ability: string, index: any) => {
+                    (ability: string, index: number) => {
                       return <div key={index}>{ability} </div>;
                     }
                   )}

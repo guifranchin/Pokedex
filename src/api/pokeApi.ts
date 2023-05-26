@@ -1,25 +1,28 @@
-import axios from "axios"
+import axios, { AxiosError } from 'axios';
+import { AbilityData } from "./apiResponse";
 
-function getInstance(){
-    return axios.create({
-        baseURL: 'https://pokeapi.co/api/v2',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+
+
+function getInstance() {
+  return axios.create({
+    baseURL: "https://pokeapi.co/api/v2",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
 
-export async function get(url: string): Promise<any>{
-    try {
-        const axios = getInstance()
-        const res = await axios.get(url)
-        return res.data
-    } catch (error: any) {
-        console.log(error.response)
-        throw error     
-    }
+export async function get<T>(url: string): Promise<T> {
+  try {
+    const axios = getInstance();
+    const res = await axios.get(url);
+    return res.data;
+  } catch (error: any) {
+    console.log(error.response);
+    throw error;
+  }
 }
 
-export function listPokemon(offset: number): Promise<any> {
-    return get(`pokemon?offset=${offset === 1 }&limit=${offset+9}`)
+export function listPokemon(offset: number): Promise<AbilityData> {
+  return get(`pokemon?offset=${offset}&limit=9`);
 }

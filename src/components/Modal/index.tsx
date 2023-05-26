@@ -12,14 +12,11 @@ export const Modal = () => {
 
   useEffect(() => {
     if (selectedPokemon) {
-      // Travar o scroll na página quando a modal for aberta no mobile
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      // Retornar para o valor original quando a modal for fechada ou em desktop
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
   }, [selectedPokemon, isMobile]);
-
 
   const onClose = () => {
     setSelectedPokemon(null);
@@ -34,7 +31,9 @@ export const Modal = () => {
       {isDesktop && (
         <ModalPokemonDesktop onClose={onClose} pokemon={selectedPokemon} />
       )}
-      {isMobile && <ModalPokemonMobile onClose={onClose} pokemon={selectedPokemon} />}
+      {isMobile && (
+        <ModalPokemonMobile onClose={onClose} pokemon={selectedPokemon} />
+      )}
     </div>
   );
 };

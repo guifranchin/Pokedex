@@ -1,11 +1,15 @@
 import { useContext} from "react";
 import styles from "./index.module.css";
 import tinycolor from "tinycolor2";
-import { typeColors } from "../PokemonCard";
 import { ModalContext } from "../../context/Modal";
+import { typeColors } from "../../models/models";
 
+interface Props {
+  pokemon: any;
+  onClose: () => void;
+}
 
-export const ModalPokemonDesktop = ({ onClose }: any) => {
+export const ModalPokemonDesktop = ({ onClose }: Props) => {
   const { selectedPokemon } = useContext(ModalContext);
 
   return (

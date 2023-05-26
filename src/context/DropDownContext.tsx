@@ -62,7 +62,7 @@ export const DropDownContextProvider = ({
   const { setPokemonCards } = useContext(PokemonContext);
 
   const fetchTypePokemon = async () => {
-    const { results } = await get("type");
+    const { results } = await get("type") as any;
 
     const dropDownItems = results.reduce((acc: any, type: any) => {
       acc[type.name] = false;
@@ -81,10 +81,9 @@ export const DropDownContextProvider = ({
   }, []);
 
   const fetchPokemonByType = async (type: any) => {
-    console.log(type, "debugging")
-    const { pokemon } = await get(`/type/${type}`);
+    const { pokemon } = await get(`/type/${type}`) as any;
     const pokemonPromises = pokemon.map(async ({ pokemon }: any) => {
-      const pokemonDetails = await get(pokemon.url);
+      const pokemonDetails = await get(pokemon.url) as any;
 
       return {
         name: pokemonDetails.name,

@@ -23,7 +23,7 @@
     width: 100%;
     margin: 0px 200px;
     gap: 40px;
-    
+
 }
 
 .img {
@@ -46,6 +46,21 @@
     gap: 90px;
 }
 
+.menu a {
+    position: relative;
+    text-decoration: none;
+}
+
+.menu a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    height: 3px;
+    width: 100%;
+    background: currentColor;
+}
+
 .button:hover {
     cursor: pointer;
 }
@@ -56,7 +71,7 @@
 
 .show {
     display: flex;
-    flex-direction: column; /* menu turns into column layout when 'show' class is applied */
+    flex-direction: column;
 }
 
 .mobileHeader {
@@ -73,17 +88,17 @@
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
-    .section{
+    .section {
         margin: 0px 10px;
     }
 
-    .menu{
+    .menu {
         gap: 20px
     }
 }
 
 @media (max-width: 768px) {
-    .section{
+    .section {
         align-items: center;
         justify-content: center;
     }
@@ -96,7 +111,7 @@
     .column {
         flex-direction: column;
     }
-    
+
     .nav {
         align-items: center;
         justify-content: center;
@@ -107,17 +122,17 @@
     }
 
     .menu {
-        display: none; 
+        display: none;
     }
 
     .show {
-        display: flex; 
+        display: flex;
     }
 
     .headerContainer {
         flex-direction: column;
         justify-content: center;
-        
+
     }
 
     .menu.show {
