@@ -3,7 +3,7 @@ import Logo from "../../assets/Logo.svg";
 import Hamburguer from "../../assets/BurgenBtn.svg";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -11,6 +11,10 @@ export const Header = () => {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+  
+  const closeMenu = () => {
+    setShowMenu(false);
   };
 
   return (
@@ -53,15 +57,15 @@ export const Header = () => {
               isMobile ? (showMenu ? styles.show : styles.hide) : ""
             }`}
           >
-            <a className={styles.button}>
-              <Link to="/">Home</Link>
+            <a className={styles.button}> 
+              <NavLink to="/" onClick={closeMenu} className={styles.link} >Home</NavLink>
             </a>
             <a className={styles.button}>
               {" "}
-              <Link to="/pokedex">Pokédex</Link>
+              <NavLink to="/pokedex" onClick={closeMenu} className={styles.link}>Pokédex</NavLink>
             </a>
             <a className={styles.button}>Legendaries</a>
-            <a className={styles.button}><Link to="https://pokeapi.co/">Documentation</Link></a>
+            <a className={styles.button} ><NavLink to="https://pokeapi.co/" className={styles.link}>Documentation</NavLink></a>
           </div>
         </nav>
       </section>
