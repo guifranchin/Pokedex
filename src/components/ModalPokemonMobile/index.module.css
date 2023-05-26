@@ -21,7 +21,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    /* background: linear-gradient(180deg, #732119 42.19%, #D93E30 42.19%); */
     border-radius: 16px; 
     overflow: hidden;
 }
