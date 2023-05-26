@@ -12,12 +12,11 @@ export const Modal = () => {
 
   useEffect(() => {
     if (selectedPokemon) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
   }, [selectedPokemon, isMobile]);
-
 
   const onClose = () => {
     setSelectedPokemon(null);
@@ -32,7 +31,9 @@ export const Modal = () => {
       {isDesktop && (
         <ModalPokemonDesktop onClose={onClose} pokemon={selectedPokemon} />
       )}
-      {isMobile && <ModalPokemonMobile onClose={onClose} pokemon={selectedPokemon} />}
+      {isMobile && (
+        <ModalPokemonMobile onClose={onClose} pokemon={selectedPokemon} />
+      )}
     </div>
   );
 };

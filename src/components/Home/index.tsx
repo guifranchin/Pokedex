@@ -19,7 +19,7 @@ export const Home = () => {
             abilities{" "}
           </h2>
           <button>
-          <Link to="/pokedex">See Pokemons</Link>
+          <Link to="/pokedex" className={styles.button}>See Pokemons</Link>
           </button>
         </div>
         <img src={ !isTabletOrMobile ?  Banner :  BannerComplete} />
