@@ -11,7 +11,7 @@ export type PokemonCardProps = {
   types: string[];
   color: string;
   imagem: string;
-  abilities: string[]
+  abilities: string[];
 };
 
 export type PokemonContextProps = {
@@ -81,21 +81,34 @@ export const PokemonContextProvider = ({
           (stat: any) => stat.stat.name === "hp"
         )?.base_stat;
 
-
         const experience = pokemonData.base_experience;
 
-        const abilities = pokemonData.abilities.map((ability: any) => ability.ability.name);
+        const abilities = pokemonData.abilities.map(
+          (ability: any) => ability.ability.name
+        );
 
         const types = pokemonData.types.map((type: any) => type.type.name);
 
         const specieUrl = pokemonData.species.url;
 
-        const {color: specieColor} = await get(specieUrl)
+        const { color: specieColor } = await get(specieUrl);
 
         const imagem =
           pokemonData.sprites.other["official-artwork"].front_default;
 
-        return { name, attack, hp, specialAttack, defense, specialDefense, experience, types, abilities,  imagem, ["color"]: specieColor.name };
+        return {
+          name,
+          attack,
+          hp,
+          specialAttack,
+          defense,
+          specialDefense,
+          experience,
+          types,
+          abilities,
+          imagem,
+          ["color"]: specieColor.name,
+        };
       }
     );
 
@@ -134,12 +147,11 @@ export const PokemonContextProvider = ({
         offset,
         setOffset,
         count,
-        setCount
+        setCount,
       }}
     >
       {children}
-      <div ref={loadMoreRef} style={{ height: "1px" }}/>
-    
+      <div ref={loadMoreRef} style={{ height: "1px" }} />
     </PokemonContext.Provider>
   );
 };

@@ -12,10 +12,8 @@ export const Modal = () => {
 
   useEffect(() => {
     if (selectedPokemon) {
-      // Travar o scroll na página quando a modal for aberta no mobile
       document.body.style.overflow = 'hidden';
     } else {
-      // Retornar para o valor original quando a modal for fechada ou em desktop
       document.body.style.overflow = 'unset';
     }
   }, [selectedPokemon, isMobile]);
