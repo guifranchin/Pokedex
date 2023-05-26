@@ -64,7 +64,7 @@ export const Header = () => {
               {" "}
               <NavLink to="/pokedex" onClick={closeMenu} className={styles.link}>Pokédex</NavLink>
             </a>
-            <a className={styles.button}>Legendaries</a>
+            <a className={styles.button}><NavLink to="/legendaries" className={styles.link}>Legendaries</NavLink></a>
             <a className={styles.button} ><NavLink to="https://pokeapi.co/" className={styles.link}>Documentation</NavLink></a>
           </div>
         </nav>
