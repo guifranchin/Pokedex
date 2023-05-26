@@ -9,6 +9,7 @@ import { Home } from "./components/Home";
 import { NotFound } from "./components/NotFound";
 import { ModalContextProvider } from "./context/Modal";
 import { Modal } from "./components/Modal";
+import { Legendaries } from "./components/Lengendaries";
 
 function App() {
   return (
@@ -20,6 +21,15 @@ function App() {
             <>
               <Header />
               <Home />
+            </>
+          }
+        />
+        <Route
+          path="/legendaries"
+          element={
+            <>
+              <Header />
+              <Legendaries />
             </>
           }
         />

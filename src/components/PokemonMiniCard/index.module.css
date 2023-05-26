@@ -1,0 +1,36 @@
+.card {
+    height: 180px;
+    width: 143px;
+    background: linear-gradient(215.78deg, #B57E10 -124.09%, #B57E10 -78.76%, #F9DF7B -35.76%, #FFF3A6 8.4%, #F9DF7B 50.24%, #B57E10 99.06%);
+    border-radius: 18px;
+    border-radius: 20px;
+}
+
+.card img {
+    height: 147px;
+    width: 171px;
+}
+
+.miniPoke {
+    height: 18px !important;
+    width: 18px !important;
+
+}
+
+.row {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row h6 {
+    font-size: 18px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: center;
+
+    color: #1D1E1D;
+}

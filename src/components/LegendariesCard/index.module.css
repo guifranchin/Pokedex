@@ -1,0 +1,105 @@
+.sectionContainer {
+    min-height: calc(100vh);
+    width: 100%;
+    background: #212121;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+.sectionContainer h6 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 84px;
+    letter-spacing: 4px;
+
+    color: #FFFFFF;
+}
+
+
+
+.line {
+    border: 1px solid #FFFFFF;
+    width: 90%;
+}
+
+.section {
+    display: flex;
+    justify-content: space-around;
+}
+
+.section h5 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    width: 400px;
+    color: #FFFFFF;
+}
+
+.section h3 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FDFDFD;
+}
+
+.section img {
+    height: 418px;
+    width: 374px;
+}
+
+.name {
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 84px;
+    letter-spacing: 4px;
+    color: #FDFDFD;
+}
+
+.points {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FDFDFD;
+}
+
+.barPoints {
+    height: 7px;
+    width: 163px;
+    background-color: blue;
+    border-radius: 8px;
+}
+
+.divFather {
+    width: 75%;
+}
+
+.pointsMenu {
+    display: flex;
+    gap: 60px;
+}
+
+.pointsSon {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.card {
+    height: 180px;
+    width: 143px;
+    background-color: blue;
+    border-radius: 20px;
+}
+
+.minicards{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
