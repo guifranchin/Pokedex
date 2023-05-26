@@ -5,9 +5,8 @@ import { SearchBarContext } from "../../context/SearchBarContext";
 export const SearchBar = () => {
   const { searchBar, setSearchBar } = useContext(SearchBarContext);
 
-  const handleSearchChange = (event: any) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchBar(event.target.value);
-    // console.log("SearchBar current " + event.target.value)
   };
 
   return (

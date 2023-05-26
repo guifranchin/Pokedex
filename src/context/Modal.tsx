@@ -1,11 +1,8 @@
 import { createContext, useState } from "react";
 
-
-
 export type ModalContextProps = {
   selectedPokemon: any;
   setSelectedPokemon: React.Dispatch<React.SetStateAction<any>>;
-
 };
 
 type ModalContextProviderProps = {

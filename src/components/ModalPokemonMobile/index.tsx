@@ -1,9 +1,10 @@
 import { useEffect, useContext } from "react";
 import styles from "./index.module.css";
 import { ModalContext } from "../../context/Modal";
-import { typeColors } from "../PokemonCard";
+
 import tinycolor from "tinycolor2";
 import { styled } from "styled-components";
+import { typeColors } from "../../models/models";
 
 export const ModalPokemonMobile = ({ onClose }: any) => {
   const { selectedPokemon } = useContext(ModalContext);

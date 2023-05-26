@@ -1,4 +1,5 @@
 import axios from "axios"
+import { AbilityData } from "./apiResponse"
 
 function getInstance(){
     return axios.create({
@@ -20,6 +21,6 @@ export async function get(url: string): Promise<any>{
     }
 }
 
-export function listPokemon(offset: number): Promise<any> {
+export function listPokemon(offset: number): Promise<AbilityData> {
     return get(`pokemon?offset=${offset === 1 }&limit=${offset+9}`)
 }
