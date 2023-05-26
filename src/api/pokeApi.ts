@@ -24,5 +24,5 @@ export async function get<T>(url: string): Promise<T> {
 }
 
 export function listPokemon(offset: number): Promise<AbilityData> {
-  return get(`pokemon?offset=${offset === 1}&limit=${offset + 9}`);
+  return get(`pokemon?offset=${offset}&limit=9`);
 }

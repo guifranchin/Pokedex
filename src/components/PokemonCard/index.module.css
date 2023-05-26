@@ -8,6 +8,7 @@
     margin: 10px;
     overflow: hidden;
     gap: 17px;
+    cursor: pointer;
 }
 
 .pokemonCard article {
@@ -96,26 +97,3 @@
 
 }
 
-
-/* @media screen and (max-width: 600px) {
-    .pokemonCard {
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-    }
-
-    .pokemonCard article {
-        margin-left: 0;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .pokemonCard img {
-        height: auto;
-        max-width: 100%;
-    }
-
-    .stats {
-        flex-direction: column;
-    }
-} */

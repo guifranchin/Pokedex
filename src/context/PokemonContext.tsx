@@ -57,7 +57,7 @@ export const PokemonContextProvider = ({
 
     const pokemonDataPromises = pokemonList.results.map(
       async (pokemon: any) => {
-        const pokemonData = await get(pokemon.url);
+        const pokemonData = await get(pokemon.url) as any;
 
         const name = pokemonData.name;
 
@@ -91,7 +91,7 @@ export const PokemonContextProvider = ({
 
         const specieUrl = pokemonData.species.url;
 
-        const { color: specieColor } = await get(specieUrl);
+        const { color: specieColor } = await get(specieUrl) as any;
 
         const imagem =
           pokemonData.sprites.other["official-artwork"].front_default;
